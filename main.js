@@ -4,6 +4,20 @@ function MyArray(...args) {
   }
   this.length = args.length;
 }
+if(!MyArray.prototype.customFilter) {
+  MyArray.prototype.customFilter = function (callback, thisArg) {
+    let array = this,
+      result = [],
+      element;
+      thisArg = this;
+      
+      for (let i = 0; i < array.length; i++) {
+        element = array[i];
+        if(callback(element, i, array, thisArg)) result.push(element);
+      }
+      return result;
+    }
+}
 
 if (!MyArray.prototype.push) {
   MyArray.prototype.push = function(...args) {
@@ -27,11 +41,12 @@ if (!MyArray.prototype.pop) {
   };
 }
 
-const arr = new MyArray(2, 4, 8, 16); 
+const arr = new MyArray(1, 2, 3, 4, 5, 6, 7, 8); 
 const poorArr = new Array(2, 4, 8, 16);
 
 //console.log(arr.push(12, 120, 4341, "rofl"));
+console.log(arr.customFilter(item => item % 2 === 0))
 console.log(arr.pop());
+
 console.log(arr);
 
-//console.log(arr.customForEach(item => console.log(item)))
