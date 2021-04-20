@@ -32,16 +32,30 @@ if(!MyArray.prototype.forEach) {
   MyArray.prototype.forEach = function (callback, thisArg) {
     let array = this,
         currentValue;
-        thisArg = this;
   
     for (let i = 0; i < array.length; i++) {
-      currentValue = array[i];
+      
       callback(currentValue, i, array, thisArg);
     }
 
     return undefined;
   }
 };
+
+if(!MyArray.prototype.map) {
+  MyArray.prototype.map = function (callback, thisArg) {
+    const array = this,
+          newArray = new MyArray();
+
+    for (let i = 0; i < array.length; i++) {
+      currentValue = array[i];
+      newArray[i] = callback.call(thisArg, array[i], currentValue, array);
+    }
+    return newArray;
+  };
+}
+
+
 
 if (!MyArray.prototype.push) {
   MyArray.prototype.push = function(...args) {
@@ -62,14 +76,18 @@ if (!MyArray.prototype.pop) {
   };
 };
 
-//test push method
-//console.log(arr.push(12, 120, 4341, "rofl"));
 
 //test filter method
-//console.log(arr.customFilter(item => item % 2 === 0))
+//console.log(arr.filter(item => item % 2 === 0))
 
 //test forEach method
-//console.log(arr.customForEach(item => console.log(item)))
+//console.log(arr.forEach(item => console.log(item)))
+
+//test map method
+console.log(arr.map(item => item * 2))
+
+//test push method
+//console.log(arr.push(12, 120, 4341, "rofl"));
 
 //test pop method
 //console.log(arr.pop());
