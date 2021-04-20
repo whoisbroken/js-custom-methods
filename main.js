@@ -1,14 +1,20 @@
 const arr = new MyArray(1, 2, 3, 4, 5, 6, 7, 8); 
 
+console.log(arr);
+
 function MyArray(...args) {
   for(let i = 0; i < args.length; i++) {
     this[i] = args[i];
   }
-  this.length = args.length;
-}
+  Object.defineProperty(this, 'length', {
+    get: function getLength() {
+      return Object.keys(this).length
+    }
+  });
+};
 
-if(!MyArray.prototype.customFilter) {
-  MyArray.prototype.customFilter = function (callback, thisArg) {
+if(!MyArray.prototype.filter) {
+  MyArray.prototype.filter = function (callback, thisArg) {
     let array = this,
       result = [],
       element;
@@ -20,9 +26,10 @@ if(!MyArray.prototype.customFilter) {
       }
       return result;
     }
-}
-if(!MyArray.prototype.customForEach) {
-  MyArray.prototype.customForEach = function (callback, thisArg) {
+};
+
+if(!MyArray.prototype.forEach) {
+  MyArray.prototype.forEach = function (callback, thisArg) {
     let array = this,
         currentValue;
         thisArg = this;
@@ -31,30 +38,29 @@ if(!MyArray.prototype.customForEach) {
       currentValue = array[i];
       callback(currentValue, i, array, thisArg);
     }
+
+    return undefined;
   }
-}
+};
 
 if (!MyArray.prototype.push) {
   MyArray.prototype.push = function(...args) {
-    for (let i = 0; i < args.length; i++) {
-      this[this.length] = args[i];
-      this.length++;
+    if(args) {
+      for (let i = 0; i < args.length; i++) {
+        this[this.length] = args[i];
+      }
+      return this.length;
     }
-    return this.length;
   };
-}
+};
 
 if (!MyArray.prototype.pop) {
   MyArray.prototype.pop = function() {
-    let array = this,
-        length = array.length;
-        element = array[length - 1];
-    length = length - 1;
-    array = array.customFilter(el => el !== element);
-    console.log(array)
-    return element;
+    const latest = this[this.length - 1];
+    delete this[this.length - 1];
+    return latest;
   };
-}
+};
 
 //test push method
 //console.log(arr.push(12, 120, 4341, "rofl"));
