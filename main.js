@@ -1,9 +1,12 @@
+const arr = new MyArray(1, 2, 3, 4, 5, 6, 7, 8); 
+
 function MyArray(...args) {
   for(let i = 0; i < args.length; i++) {
     this[i] = args[i];
   }
   this.length = args.length;
 }
+
 if(!MyArray.prototype.customFilter) {
   MyArray.prototype.customFilter = function (callback, thisArg) {
     let array = this,
@@ -17,6 +20,18 @@ if(!MyArray.prototype.customFilter) {
       }
       return result;
     }
+}
+if(!MyArray.prototype.customForEach) {
+  MyArray.prototype.customForEach = function (callback, thisArg) {
+    let array = this,
+        currentValue;
+        thisArg = this;
+  
+    for (let i = 0; i < array.length; i++) {
+      currentValue = array[i];
+      callback(currentValue, i, array, thisArg);
+    }
+  }
 }
 
 if (!MyArray.prototype.push) {
@@ -41,12 +56,15 @@ if (!MyArray.prototype.pop) {
   };
 }
 
-const arr = new MyArray(1, 2, 3, 4, 5, 6, 7, 8); 
-const poorArr = new Array(2, 4, 8, 16);
-
+//test push method
 //console.log(arr.push(12, 120, 4341, "rofl"));
-console.log(arr.customFilter(item => item % 2 === 0))
-console.log(arr.pop());
 
-console.log(arr);
+//test filter method
+//console.log(arr.customFilter(item => item % 2 === 0))
 
+//test forEach method
+//console.log(arr.customForEach(item => console.log(item)))
+
+//test pop method
+//console.log(arr.pop());
+//console.log(arr);
