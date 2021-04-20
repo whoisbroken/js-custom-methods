@@ -15,6 +15,23 @@ if (!MyArray.prototype.push) {
   };
 }
 
-const arr = new MyArray(15, 12, 'shgsf', 1234); 
+if (!MyArray.prototype.pop) {
+  MyArray.prototype.pop = function() {
+    let array = this,
+        length = array.length;
+        element = array[length - 1];
+    length = length - 1;
+    array = array.customFilter(el => el !== element);
+    console.log(array)
+    return element;
+  };
+}
 
-console.log(arr.push(12, 120, 4341, "rofl"));
+const arr = new MyArray(2, 4, 8, 16); 
+const poorArr = new Array(2, 4, 8, 16);
+
+//console.log(arr.push(12, 120, 4341, "rofl"));
+console.log(arr.pop());
+console.log(arr);
+
+//console.log(arr.customForEach(item => console.log(item)))
