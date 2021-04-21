@@ -6,7 +6,7 @@ const arr = new MyArray(1, 2, 3, 4);
 console.log(arr);
 
 //test filter method
-//console.log(arr.filter(item => item % 2 === 0))
+// console.log(arr.filter(item => item % 2 === 0))
 // console.log(arr.filter(
 // function (item) {
 //   return item % 2 === 0
@@ -32,3 +32,6 @@ console.log(arr);
 //test pop method
 // console.log(arr.pop());
 // console.log(arr);
+
+//test toString method
+//console.log(arr.toString())

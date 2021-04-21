@@ -11,9 +11,7 @@ export const MyArray = function(...args) {
 
 MyArray.prototype.filter = function (callback, thisArg) {
   const array = this;
-  let newArray = new MyArray();
-
-  console.log(newArray)
+  const newArray = new MyArray();
   
   for (let i = 0; i < array.length; i++) {
     let element = array[i];
@@ -25,7 +23,7 @@ MyArray.prototype.filter = function (callback, thisArg) {
 };
 
 MyArray.prototype.forEach = function (callback, thisArg) {
-  let array = this;
+  const array = this;
 
   for (let i = 0; i < array.length; i++) {
     let currentValue = array[i]
@@ -87,4 +85,15 @@ MyArray.prototype.pop = function() {
   const latest = this[this.length - 1];
   delete this[this.length - 1];
   return latest;
+};
+
+MyArray.prototype.toString = function() {
+  const array = this;
+  let result = "";
+
+  for (let i = 0; i < array.length; i++) {
+    result += `${array[i]},`
+  }
+
+  return result.slice(0, result.length - 1);
 };
