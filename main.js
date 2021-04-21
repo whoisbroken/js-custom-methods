@@ -1,8 +1,4 @@
-const arr = new MyArray(1, 2, 3, 4, 5, 6, 7, 8); 
-
-console.log(arr);
-
-function MyArray(...args) {
+export const MyArray = function(...args) {
   for(let i = 0; i < args.length; i++) {
     this[i] = args[i];
   }
@@ -11,14 +7,16 @@ function MyArray(...args) {
       return Object.keys(this).length
     }
   });
-};
+};  
 
 MyArray.prototype.filter = function (callback, thisArg) {
   const array = this;
-        newArray = new MyArray();
+  let newArray = new MyArray();
+
+  console.log(newArray)
   
   for (let i = 0; i < array.length; i++) {
-    element = array[i];
+    let element = array[i];
     if(callback.call(thisArg, element, i, array)) {
       newArray.push(element);
     }
@@ -27,26 +25,54 @@ MyArray.prototype.filter = function (callback, thisArg) {
 };
 
 MyArray.prototype.forEach = function (callback, thisArg) {
-  let array = this,
-      currentValue;
+  let array = this;
 
   for (let i = 0; i < array.length; i++) {
+    let currentValue = array[i]
     callback.call(thisArg, currentValue, i, array);
   }
 
   return undefined;
 };
 
+
 MyArray.prototype.map = function (callback, thisArg) {
   const array = this,
         newArray = new MyArray();
 
   for (let i = 0; i < array.length; i++) {
-    currentValue = array[i];
+    let currentValue = array[i];
     newArray[i] = callback.call(thisArg, array[i], currentValue, array);
   }
   return newArray;
 };
+
+
+MyArray.prototype.reduce = function(callback, initialValue) {
+  const array = this;
+  let accumulator = initialValue === undefined ? undefined : initialValue;
+
+  if (array === null && initialValue === undefined) {
+    throw new TypeError('Array.prototype.reduce called on null or undefined');
+  }
+
+  for (let i = 0; i < array.length; i++) {
+    if (accumulator){
+      let currentValue = array[i];
+      accumulator = callback(accumulator, currentValue, i, array);
+    }
+    if (accumulator === undefined) {
+      let currentValue = array[i];
+      if (i === 0) {
+        accumulator = array[i];
+      } else {
+        accumulator = callback(accumulator, currentValue, i, array);
+      }
+    }
+  }
+
+  return accumulator;
+}
 
 MyArray.prototype.push = function(...args) {
   if(args) {
@@ -57,32 +83,8 @@ MyArray.prototype.push = function(...args) {
   }
 };
 
-
 MyArray.prototype.pop = function() {
   const latest = this[this.length - 1];
   delete this[this.length - 1];
   return latest;
 };
-
-
-//test filter method
-//console.log(arr.filter(item => item % 2 === 0))
-// console.log(arr.filter(
-  // function (item) {
-  //   return item % 2 === 0
-  // }))
-
-//test forEach method
-// console.log(arr.forEach(function (item, i , arr) {
-//   console.log(item, i , arr)
-// }), {a: 1, b: 2})
-
-//test map method
-//console.log(arr.map(item => item * 2))
-
-//test push method
-//console.log(arr.push(12, 120, 4341, "rofl"));
-
-//test pop method
-//console.log(arr.pop());
-//console.log(arr);
