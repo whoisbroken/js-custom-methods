@@ -1,10 +1,14 @@
 import { MyArray } from "./main.js";
 
-const arr = new MyArray(100, 1, 4, 7, 5, 4); 
-const poorArr = new Array('арбузы', 'бананы', 'Вишня');
+const arr = new MyArray(100, 1, 4, 7, 5, 4);
+const realArr = [...arr];
 
 //test arr
 //console.log(arr);
+
+//test spread
+// console.log([arr])
+// console.log(realArr)
 
 //test filter method
 // console.log(arr.filter(item => item % 2 === 0))

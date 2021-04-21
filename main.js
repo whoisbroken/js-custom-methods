@@ -9,6 +9,21 @@ export const MyArray = function(...args) {
   });
 };  
 
+MyArray.prototype[Symbol.iterator] = function () {
+  return {
+    current: 0,
+    last: this.length - 1,
+    items: this,
+    next() {
+      if (this.current <= this.last) {
+        return { done: false, value: this.items[this.current++] };
+      } else {
+        return { done: true };
+      }
+    }
+  };
+};
+
 MyArray.prototype.filter = function (callback, thisArg) {
   const array = this;
   const newArray = new MyArray();
@@ -95,7 +110,6 @@ MyArray.prototype.sort = function (callback) {
   }
   return this;
 };
-
 
 MyArray.prototype.push = function(...args) {
   if(args) {
