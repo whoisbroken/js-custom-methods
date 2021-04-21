@@ -90,22 +90,24 @@ MyArray.prototype.reduce = function(callback, initialValue) {
 MyArray.prototype.sort = function (callback) {
   if (callback) {
     for (let i = 0; i < this.length - 1; i++) {
-        for (let j = 0; j < this.length - 1; j++) {
-            if (callback(this[j], this[j + 1]) > 0) {
-              let temp = this[j];
-              this[j] = this[j + 1];
-              this[j + 1] = temp;
-            }
+      for (let j = 0; j < this.length - 1; j++) {
+        if (callback(this[j], this[j + 1]) > 0) {
+          let temp = this[j];
+          this[j] = this[j + 1];
+          this[j + 1] = temp;
         }
+      }
     }
   } else {
     for (let i = 1; i < this.length; i++) {
       const current = this[i];
-      while (this[i] > 0 && this[i - 1] > current) {
-          this[i] = this[i - 1];
-          i--;
+      let j = i;
+      console.log(this[i],j)
+      while (j > 0 && this[j - 1] > current) {
+          this[j] = this[j - 1];
+          j--;
       }
-      this[i] = current;
+      this[j] = current;
     }
   }
   return this;

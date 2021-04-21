@@ -1,6 +1,6 @@
 import { MyArray } from "./main.js";
 
-const arr = new MyArray(100, 1, 4, 7, 5, 4);
+const arr = new MyArray(100, 1, 4, -5, 5, 4);
 const realArr = [...arr];
 
 //test arr
@@ -38,7 +38,7 @@ const realArr = [...arr];
 //console.log(arr.toString())
 
 //test sort method
-// console.log(arr.sort());
+console.log(arr.sort());
 // console.log(arr.sort((a, b) => a.length - b.length));
 // console.log(arr.sort((a, b) => a - b));
 
