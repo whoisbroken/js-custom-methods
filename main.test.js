@@ -1,6 +1,6 @@
 import { MyArray } from "./main.js";
 
-const arr = new MyArray('арбузы', 'бананы', 'Вишня'); 
+const arr = new MyArray(100, 1, 4, 7, 5, 4); 
 const poorArr = new Array('арбузы', 'бананы', 'Вишня');
 
 //test arr
@@ -37,3 +37,16 @@ const poorArr = new Array('арбузы', 'бананы', 'Вишня');
 // console.log(arr.sort());
 // console.log(arr.sort((a, b) => a.length - b.length));
 // console.log(arr.sort((a, b) => a - b));
+
+//test from method
+//console.log(arr.from('foo'))
+// var s = new Set(['foo', window]);
+// var m = new Map([[1, 2], [2, 4], [4, 8]]);
+// console.log(arr.from(s))
+// console.log(arr.from(m))
+//console.log(arr.from([1, 2, 3], x => x + x))
+
+// function f() {
+//   return arr.from(arguments);
+// }
+// console.log(f(5, 2, 1))

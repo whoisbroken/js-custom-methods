@@ -123,16 +123,19 @@ MyArray.prototype.toString = function() {
   return result.slice(0, result.length - 1);
 };
 
-// const insertionSort = arr => {
-//   const length = arr.length;
-//   for (let i = 1; i < length; i++) {
-//     const current = arr[i];
-//     let j = i;
-//     while (j > 0 && arr[j - 1] > current) {
-//         arr[j] = arr[j - 1];
-//         j--;
-//     }
-//     arr[j] = current;
-//   }
-//   return arr;
-// };
+MyArray.prototype.from = function (array, callback, thisArg) {
+  const newArray = new MyArray();
+  let i = 0;
+
+  if (typeof array[Symbol.iterator]) {
+    for (let value of array) {
+      if (callback) {
+        newArray.push(callback.call(thisArg, value, i, array));
+      } else {
+        newArray.push(value);
+      }
+      i++;
+    }
+  }
+  return newArray;
+};
