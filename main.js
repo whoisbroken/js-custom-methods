@@ -14,9 +14,9 @@ MyArray.prototype.filter = function (callback, thisArg) {
   const newArray = new MyArray();
   
   for (let i = 0; i < array.length; i++) {
-    let element = array[i];
-    if(callback.call(thisArg, element, i, array)) {
-      newArray.push(element);
+    let currentValue = array[i];
+    if(callback.call(thisArg, currentValue, i, array)) {
+      newArray.push(currentValue);
     }
   }
   return newArray;
@@ -40,7 +40,7 @@ MyArray.prototype.map = function (callback, thisArg) {
 
   for (let i = 0; i < array.length; i++) {
     let currentValue = array[i];
-    newArray[i] = callback.call(thisArg, array[i], currentValue, array);
+    newArray[i] = callback.call(thisArg, currentValue, i, array);
   }
   return newArray;
 };
@@ -72,6 +72,31 @@ MyArray.prototype.reduce = function(callback, initialValue) {
   return accumulator;
 }
 
+MyArray.prototype.sort = function (callback) {
+  if (callback) {
+    for (let i = 0; i < this.length - 1; i++) {
+        for (let j = 0; j < this.length - 1; j++) {
+            if (callback(this[j], this[j + 1]) > 0) {
+              let temp = this[j];
+              this[j] = this[j + 1];
+              this[j + 1] = temp;
+            }
+        }
+    }
+  } else {
+    for (let i = 1; i < this.length; i++) {
+      const current = this[i];
+      while (this[i] > 0 && this[i - 1] > current) {
+          this[i] = this[i - 1];
+          i--;
+      }
+      this[i] = current;
+    }
+  }
+  return this;
+};
+
+
 MyArray.prototype.push = function(...args) {
   if(args) {
     for (let i = 0; i < args.length; i++) {
@@ -97,3 +122,17 @@ MyArray.prototype.toString = function() {
 
   return result.slice(0, result.length - 1);
 };
+
+// const insertionSort = arr => {
+//   const length = arr.length;
+//   for (let i = 1; i < length; i++) {
+//     const current = arr[i];
+//     let j = i;
+//     while (j > 0 && arr[j - 1] > current) {
+//         arr[j] = arr[j - 1];
+//         j--;
+//     }
+//     arr[j] = current;
+//   }
+//   return arr;
+// };
