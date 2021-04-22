@@ -11,7 +11,7 @@ const realArr = [...arr];
 // console.log(realArr)
 
 //test filter method
-// console.log(arr.filter(item => item % 2 === 0))
+// console.log(arr.filter(123))
 
 //test forEach method
 // console.log(arr.forEach(function (item, i , arr) {
@@ -38,17 +38,17 @@ const realArr = [...arr];
 //console.log(arr.toString())
 
 //test sort method
-console.log(arr.sort());
+//console.log(arr.sort());
 // console.log(arr.sort((a, b) => a.length - b.length));
 // console.log(arr.sort((a, b) => a - b));
 
-//test from method
-//console.log(arr.from('foo'))
+// test from method
+// console.log(arr.from('foo'));
 // var s = new Set(['foo', window]);
 // var m = new Map([[1, 2], [2, 4], [4, 8]]);
 // console.log(arr.from(s))
 // console.log(arr.from(m))
-//console.log(arr.from([1, 2, 3], x => x + x))
+// console.log(arr.from([1, 2, 3], x => x + x))
 
 // function f() {
 //   return arr.from(arguments);

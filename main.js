@@ -27,6 +27,10 @@ MyArray.prototype[Symbol.iterator] = function () {
 MyArray.prototype.filter = function (callback, thisArg) {
   const array = this;
   const newArray = new MyArray();
+
+  if (typeof callback !== 'function') {
+    throw new TypeError(callback + ' is not a function');
+  }
   
   for (let i = 0; i < array.length; i++) {
     let currentValue = array[i];
@@ -40,6 +44,10 @@ MyArray.prototype.filter = function (callback, thisArg) {
 MyArray.prototype.forEach = function (callback, thisArg) {
   const array = this;
 
+  if (typeof callback !== 'function') {
+    throw new TypeError(callback + ' is not a function');
+  }
+
   for (let i = 0; i < array.length; i++) {
     let currentValue = array[i]
     callback.call(thisArg, currentValue, i, array);
@@ -52,6 +60,10 @@ MyArray.prototype.forEach = function (callback, thisArg) {
 MyArray.prototype.map = function (callback, thisArg) {
   const array = this,
         newArray = new MyArray();
+
+  if (typeof callback !== 'function') {
+    throw new TypeError(callback + ' is not a function');
+  }
 
   for (let i = 0; i < array.length; i++) {
     let currentValue = array[i];
@@ -67,6 +79,10 @@ MyArray.prototype.reduce = function(callback, initialValue) {
 
   if (array === null && initialValue === undefined) {
     throw new TypeError('Array.prototype.reduce called on null or undefined');
+  }
+
+  if (typeof callback !== 'function') {
+    throw new TypeError(callback + ' is not a function');
   }
 
   for (let i = 0; i < array.length; i++) {
@@ -88,6 +104,10 @@ MyArray.prototype.reduce = function(callback, initialValue) {
 }
 
 MyArray.prototype.sort = function (callback) {
+  if (typeof callback !== 'function') {
+    throw new TypeError(callback + ' is not a function');
+  }
+
   if (callback) {
     for (let i = 0; i < this.length - 1; i++) {
       for (let j = 0; j < this.length - 1; j++) {
@@ -102,7 +122,6 @@ MyArray.prototype.sort = function (callback) {
     for (let i = 1; i < this.length; i++) {
       const current = this[i];
       let j = i;
-      console.log(this[i],j)
       while (j > 0 && this[j - 1] > current) {
           this[j] = this[j - 1];
           j--;
@@ -142,7 +161,6 @@ MyArray.prototype.toString = function() {
 MyArray.prototype.from = function (array, callback, thisArg) {
   const newArray = new MyArray();
   let i = 0;
-
   if (typeof array[Symbol.iterator]) {
     for (let value of array) {
       if (callback) {
