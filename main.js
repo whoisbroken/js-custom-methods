@@ -7,7 +7,7 @@ export const MyArray = function(...args) {
       return Object.keys(this).length
     }
   });
-};  
+};
 
 MyArray.prototype[Symbol.iterator] = function () {
   return {
@@ -104,9 +104,6 @@ MyArray.prototype.reduce = function(callback, initialValue) {
 }
 
 MyArray.prototype.sort = function (callback) {
-  if (typeof callback !== 'function') {
-    throw new TypeError(callback + ' is not a function');
-  }
 
   if (callback) {
     for (let i = 0; i < this.length - 1; i++) {
