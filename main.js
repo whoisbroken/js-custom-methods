@@ -155,7 +155,7 @@ MyArray.prototype.toString = function() {
   return result.slice(0, result.length - 1);
 };
 
-MyArray.prototype.from = function (array, callback, thisArg) {
+MyArray.from = function (array, callback, thisArg) {
   const newArray = new MyArray();
   let i = 0;
   if (typeof array[Symbol.iterator]) {
